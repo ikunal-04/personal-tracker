@@ -34,31 +34,32 @@ export function TaskList({ tasks, onToggleComplete, onDeleteTask }: TaskListProp
         return (
           <div
             key={task.id}
-            className={`bg-white p-6 rounded-lg shadow-md ${
-              isExpired ? 'opacity-50' : ''
-            }`}
+            className={`task-card ${isExpired ? 'opacity-50' : ''}`}
           >
             <div className="flex items-start justify-between">
               <div className="flex-1">
-                <h3 className="text-lg font-semibold text-gray-800">{task.title}</h3>
-                <p className="text-gray-600 mt-1">{task.description}</p>
+                <h3 className="text-lg font-semibold text-gray-100">{task.title}</h3>
+                <p className="text-gray-400 mt-1">{task.description}</p>
                 <div className="mt-2 space-y-1">
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-400">
                     End Date: {formatDate(task.endDate)}
                   </p>
-                  <p className="text-lg text-gray-800">
+                  <p className="text-sm text-gray-400">
                     Days Remaining: {' '}
-                    <span className={daysRemaining <= 3 ? 'text-red-500 font-semibold' : ''}>
+                    <span className={daysRemaining <= 3 ? 'text-red-400 font-semibold' : ''}>
                       {daysRemaining}
                     </span>
                   </p>
+                  {task.isDailyReset && (
+                    <p className="text-sm text-blue-400">Daily reset enabled</p>
+                  )}
                 </div>
               </div>
 
               <div className="flex items-center space-x-4">
                 <button
                   onClick={() => onToggleComplete(task.id)}
-                  className="text-gray-600 hover:text-green-600 transition-colors"
+                  className="text-gray-400 hover:text-green-400 transition-colors"
                   disabled={isExpired}
                 >
                   {task.isCompletedToday ? (
@@ -69,7 +70,7 @@ export function TaskList({ tasks, onToggleComplete, onDeleteTask }: TaskListProp
                 </button>
                 <button
                   onClick={() => onDeleteTask(task.id)}
-                  className="text-gray-600 hover:text-red-600 transition-colors"
+                  className="text-gray-400 hover:text-red-400 transition-colors"
                 >
                   <Trash2 className="w-6 h-6" />
                 </button>
